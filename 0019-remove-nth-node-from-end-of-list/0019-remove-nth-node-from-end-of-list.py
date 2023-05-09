@@ -10,10 +10,27 @@ class Solution(object):
         :type n: int
         :rtype: ListNode
         """
-        fast, slow = head, head
-        for _ in range(n): fast = fast.next
-        if not fast: return head.next
-        while fast.next: fast, slow = fast.next, slow.next
-        slow.next = slow.next.next
-        return head
+        len = 1
+        i = head
+        while i.next != None:
+            len = len + 1
+            i = i.next
         
+        if len == 1:
+            head = None
+        elif n == 1:
+            j = head
+            for i in range(len-2):
+                j = j.next
+            j.next = None
+        
+        elif len == n:
+            j = head
+            head = head.next
+        else:
+            j = head
+            for i in range(len-n-1):
+                j = j.next
+            k = j.next.next
+            j.next = k
+        return head
